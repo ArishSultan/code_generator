@@ -9,7 +9,12 @@ abstract class Generator<T extends Generatable> {
   /// than [Generatable.transform] must be called explicitly to ensure safety.
   String process(GeneratorContext context, T generatable);
 
-  ///
+  /// This must be called by user to initiate the generation of code. It is
+  /// mandatory to provide [generatable] but it is not recommended to pass
+  /// [context], since it is not possible for user to create and instance of
+  /// [GeneratorContext]. Though the processing or the behaviour of generator
+  /// must be defined in [process], and it is guaranteed that [process] will
+  /// receive a valid [context].
   @mustCallSuper
   String generate(T generatable, [GeneratorContext? context]) {
     generatable._transform();
