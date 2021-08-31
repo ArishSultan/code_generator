@@ -7,6 +7,7 @@ abstract class Generator<T extends Generatable> {
   /// This method must not be called intentionally, it is called by [generate]
   /// to ensure safety. if a user needs to call [process] instead of [generate]
   /// than [Generatable.transform] must be called explicitly to ensure safety.
+  @protected
   String process(GeneratorContext context, T generatable);
 
   /// This must be called by user to initiate the generation of code. It is
@@ -16,8 +17,8 @@ abstract class Generator<T extends Generatable> {
   /// must be defined in [process], and it is guaranteed that [process] will
   /// receive a valid [context].
   @mustCallSuper
-  String generate(T generatable, [GeneratorContext? context]) {
+  String generate(GeneratorContext context, T generatable) {
     generatable._transform();
-    return process(context ?? GeneratorContext._(), generatable);
+    return process(context, generatable);
   }
 }
