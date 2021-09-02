@@ -7,7 +7,7 @@ class GeneratorContext {
 
   T get<T>(int key) {
     final item = _storage[key];
-    if (key is T) return item;
+    if (item is T) return item;
 
     throw 'Invalid type detected';
   }
