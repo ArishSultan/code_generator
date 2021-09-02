@@ -20,6 +20,7 @@ class ElementName {
     if (name.isEmpty) parts.add(name);
 
     var allUpper = true;
+    var isSeparated = false;
     final buffer = StringBuffer();
     final codeUnits = name.codeUnits;
 
@@ -29,15 +30,17 @@ class ElementName {
 
       allUpper = allUpper && isUpper;
       if (_isSeparatorCharacter(unit)) {
+        isSeparated = true;
         parts.add(buffer.toString().toLowerCase());
         buffer.clear();
         continue;
-      } else if (isUpper && i != 0) {
+      } else if (isUpper && i != 0 && !isSeparated) {
         parts.add(buffer.toString().toLowerCase());
         buffer.clear();
       }
 
       buffer.write(String.fromCharCode(unit));
+      if (isSeparated) isSeparated = false;
     }
 
     if (buffer.isNotEmpty) {
@@ -58,7 +61,7 @@ class ElementName {
   /// Examples
   /// * [sample, name] will be converted to sample_name.
   /// * [another, sample, name] will be converted to another_sample_name.
-  String toSnakeCase() => parts.join('_');
+  String toSnakeCase() => parts.map(_lower).join('_');
 
   /// Join's the [parts] to create a name that follows `kebab-case` convention.
   /// This convention is mostly used in markup languages like,
@@ -67,7 +70,7 @@ class ElementName {
   /// Examples
   /// * [sample, name] will be converted to sample-name.
   /// * [another, sample, name] will be converted to another-sample-name.
-  String toKebabCase() => parts.join('-');
+  String toKebabCase() => parts.map(_lower).join('-');
 
   /// Join's the [parts] to create a name that follows `camelCase` convention.
   /// This convention is mostly used for naming variables in high level OOP
@@ -79,10 +82,10 @@ class ElementName {
   /// * [another, sample, name] will be converted to anotherSampleName.
   String toCamelCase() =>
       parts[0] +
-          parts
-              .sublist(1)
-              .map((e) => e.isNotEmpty ? e[0].toUpperCase() + e.substring(1) : e)
-              .join('');
+      parts
+          .sublist(1)
+          .map((e) => e.isNotEmpty ? e[0].toUpperCase() + e.substring(1) : e)
+          .join('');
 
   /// Join's the [parts] to create a name that follows `PascalCase` convention.
   /// This convention is mostly used for naming Classes, Methods in high level
@@ -100,5 +103,8 @@ class ElementName {
   String toString() => parts.toString();
 }
 
+String _lower(String str) => str.toLowerCase();
+
 bool _isUpperCaseCharacter(int char) => char >= 65 && char <= 90;
+
 bool _isSeparatorCharacter(int char) => char == 32 || char == 95 || char == 45;
