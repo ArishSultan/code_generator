@@ -4,6 +4,7 @@ part of code_generator;
 /// the generator to generate code.
 abstract class Generatable<T> {
   /// Creates an instance of [Generatable]
+  /// TODO: Add const after removing [transform]
   Generatable(this.source);
 
   @protected
@@ -17,9 +18,11 @@ abstract class Generatable<T> {
   /// libraries but user is required to provide a valid implementation for this
   /// method.
   @protected
+  @deprecated
   void transform();
 
   var _isTransformed = false;
+  @deprecated
   void _transform() {
     if (_isTransformed) return;
 
