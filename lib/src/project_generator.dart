@@ -5,10 +5,13 @@ abstract class ProjectGenerator<T extends Generatable> {
 
   static FutureOr<void> execute(
     ProjectGenerator generator,
-    Generatable generatable, [
+    Generatable generatable, {
+    CodeWriter? writer,
     GeneratorContext? context,
-  ]) {
-    if (context != null) context = GeneratorContext._();
-    return generator.generate(context!, generatable);
+  }) {
+    writer ??= CodeWriter();
+    context ??= GeneratorContext._();
+
+    return generator.generate(context, generatable);
   }
 }
