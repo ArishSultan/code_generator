@@ -2,8 +2,9 @@ library code_generator;
 
 import 'dart:async';
 import 'dart:collection';
-import 'package:code_generator/src/io/writer.dart';
 import 'package:meta/meta.dart';
+
+import 'src/io/writer.dart';
 
 export 'src/utils/element_name.dart';
 export 'src/utils/ref.dart';
