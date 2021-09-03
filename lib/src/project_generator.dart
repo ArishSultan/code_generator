@@ -1,9 +1,9 @@
 part of code_generator;
 
 abstract class ProjectGenerator<T extends Generatable> {
-  FutureOr<void> generate(GeneratorContext context, T generatable);
+  void generate(GeneratorContext context, T generatable);
 
-  static FutureOr<void> execute(
+  static void execute(
     ProjectGenerator generator,
     Generatable generatable, {
     CodeWriter? writer,
@@ -12,6 +12,6 @@ abstract class ProjectGenerator<T extends Generatable> {
     writer ??= CodeWriter();
     context ??= GeneratorContext._();
 
-    return generator.generate(context, generatable);
+    generator.generate(context, generatable);
   }
 }
