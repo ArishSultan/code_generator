@@ -1,6 +1,6 @@
 name: code_generator
-description: A starting point for Dart libraries or applications.
-version: 1.0.0
+description: Provides interface/helper classes for implementing applications for generating code.
+version: 0.1.0
 
 environment:
   sdk: '>=2.13.0 <3.0.0'
