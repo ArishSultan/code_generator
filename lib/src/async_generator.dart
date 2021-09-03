@@ -1,6 +1,6 @@
 part of code_generator;
 
-abstract class AsyncGenerator<T> {
+abstract class AsyncGenerator<T extends Generatable> {
   Stream<String> generate(GeneratorContext context, T generatable);
 
   static Stream<String> execute(
