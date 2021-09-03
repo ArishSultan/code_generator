@@ -22,7 +22,7 @@ class CodeWriter {
     );
   }
 
-  Future<void> prepareDir(List<String> pathSegments) async {
+  static Future<void> prepareDir(List<String> pathSegments) async {
     final directory = Directory(joinAll(pathSegments));
     if (await directory.exists()) {
       await directory.delete(recursive: true);
@@ -38,7 +38,7 @@ class CodeWriter {
     file.writeAsStringSync(content);
   }
 
-  void prepareDirSync(List<String> pathSegments) {
+  static void prepareDirSync(List<String> pathSegments) {
     final directory = Directory(joinAll(pathSegments));
     if (directory.existsSync()) {
       directory.deleteSync(recursive: true);
