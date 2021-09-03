@@ -1,7 +1,9 @@
 part of code_generator;
 
 class GeneratorContext {
-  GeneratorContext._();
+  GeneratorContext._([SplayTreeMap<int, dynamic>? initial]) {
+    if (initial != null) _storage.addAll(initial);
+  }
 
   final _storage = SplayTreeMap<int, dynamic>();
 
@@ -14,5 +16,9 @@ class GeneratorContext {
 
   void set<T>(int key, T data) {
     _storage[key] = data;
+  }
+
+  GeneratorContext clone() {
+    return GeneratorContext._(SplayTreeMap.of(_storage));
   }
 }

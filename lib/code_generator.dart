@@ -2,6 +2,7 @@ library code_generator;
 
 import 'dart:async';
 import 'dart:collection';
+import 'dart:html';
 import 'package:meta/meta.dart';
 
 export 'src/utils/element_name.dart';
